@@ -1,6 +1,7 @@
 package be.ictdynamic;
 
 import org.junit.Test;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -9,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by wvdbrand on 6/04/2017.
  */
+@PropertySource("classpath:application.properties ")
 public class DynaRouteServiceTests {
     public static final String TEST_PARAMETER_HAPPY_FLOW_KEY = "DUMMY";
     public static final String TEST_PARAMETER_SAD_FLOW_KEY = "THIS KEY DOES NOT EXIST";

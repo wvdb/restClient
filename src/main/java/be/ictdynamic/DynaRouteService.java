@@ -18,9 +18,6 @@ public class DynaRouteService {
     @Value("${endpoint.dyna-route-service.greeting}")
     private String endpointDynaRouteServiceGreeting;
 
-    @Value("${endpoint.dyna-route-service.systemParameters}")
-    private String endpointDynaRouteServiceSystemParameters;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(DynaRouteService.class);
 
     /**
@@ -33,7 +30,7 @@ public class DynaRouteService {
         RestTemplateBuilder builder = new RestTemplateBuilder();
         RestTemplate restTemplate = builder.build();
 
-        // TODO : to remove once component scan works
+        // TODO : to remove once problem with @Value has been resolved
         endpointDynaRouteServiceGreeting = "http://localhost:8088/dyna-route-service/greeting";
         LOGGER.debug("endpointDynaRouteServiceGreeting = " + endpointDynaRouteServiceGreeting);
         String url = endpointDynaRouteServiceGreeting + "?commune="+commune;
@@ -45,7 +42,7 @@ public class DynaRouteService {
     }
 
     /**
-     * Calls the DynaRouteService systemParameters endpoint
+     * Calls the DynaRouteService systemParameters endpoint and modifies one parameter
      * @return The response form the DynaRouteService
      * @param parameterKey the key to be modified
      * @param parameterValue the value of the key
@@ -61,10 +58,8 @@ public class DynaRouteService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_XML);
 
-        // TODO : to remove once component scan works
-        endpointDynaRouteServiceSystemParameters = "http://localhost:8088/dyna-route-service/systemParameters";
+        String url = "http://localhost:8088/dyna-route-service/systemParameters/" + parameterKey;
         HttpEntity<SystemParameterRequest> requestEntity = new HttpEntity<>(request, headers);
-        String url = endpointDynaRouteServiceSystemParameters;
         LOGGER.debug("URL endpointDynaRouteServiceSystemParameters = " + url);
 
         try {
