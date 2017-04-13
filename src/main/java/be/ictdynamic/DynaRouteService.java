@@ -52,7 +52,6 @@ public class DynaRouteService {
         RestTemplate restTemplate = builder.build();
 
         SystemParameterRequest request = new SystemParameterRequest();
-        request.setParameterKey(parameterKey);
         request.setParameterValue(parameterValue);
 
         HttpHeaders headers = new HttpHeaders();
